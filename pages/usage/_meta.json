@@ -1,0 +1,17 @@
+{
+  "configuration": "Configuration",
+  "endpoints": "Creating Endpoints",
+  "associations": "Association",
+  "route": "Route Customization",
+  "querying": "Querying",
+  "validation": "Validation",
+  "middleware": "Middleware",
+  "authentication": "Authentication",
+  "authorization": "Authorization",
+  "auditlogs": "Audit Logs",
+  "policies": "Policies",
+  "methods": "Wrapper Methods",
+  "softdelete": "Soft Delete",
+  "metadata": "Metadata",
+  "model": "Model Generation"
+}
