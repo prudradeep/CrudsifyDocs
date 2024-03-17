@@ -1,0 +1,56 @@
+# Quick Start
+Quick start your APIs with all predefined models and data.
+
+## Get files
+
+Get quick start files in the project directory
+
+In your project directory, run:
+
+```bash
+# For windows
+node_modules/.bin/crudsify-cli.cmd copy
+
+# For others
+node_modules/.bin/crudsify-cli copy
+```
+
+## Migrate tables
+Run below command to create tables in the database
+
+```bash
+npx sequelize-cli db:migrate
+```
+>**NOTE**: Make sure database configuration should be correctly defined in the **environment** file and exists.
+
+
+## Seed data
+Run below command to seed data
+```bash
+npm install @faker-js/faker --save-dev
+npx sequelize-cli db:seed:all
+```
+
+## Authentication
+Enable authentication in configuration file, by default authentication is disabled.
+
+```js filename="config/index.js"
+{
+    authentication: true
+}
+```
+
+and update index.js file as below.
+```js filename="index.js"
+const crudsifyServer = require("crudsify");
+const { refreshStrategy } = require("./strategies/refresh");
+crudsifyServer(refreshStrategy);
+```
+
+## Run API server
+
+You can then run
+
+```bash
+node index.js
+```

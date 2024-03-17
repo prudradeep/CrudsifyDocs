@@ -1,0 +1,67 @@
+# Route customizaion
+
+## Custom path names
+
+By default route paths are constructed using model names, however aliases can be provided to customize the route paths.
+**routeOptions.alias** can be set to alter the base path name, and an **alias** property for an association can be set to alter the association path name.
+
+### Example
+
+```js
+user.routeOptions = {
+  alias: "person",
+  role: {
+    group: "category",
+  },
+};
+```
+
+will result in the following endpoints:
+
+```
+DELETE /person
+POST /person
+GET /person
+DELETE /person/{id}
+GET /person/{id}
+PUT /person/{id}
+GET /person/{ownerId}/category
+DELETE /person/{ownerId}/category
+POST /person/{ownerId}/category
+DELETE /person/{ownerId}/category/{childId}
+PUT /person/{ownerId}/category/{childId}
+```
+
+## Ommiting routes
+
+You can prevent CRUD endpoints from generating by setting the correct property to **false** within the **routeOptions** object. Below is a list of properties and their effect:
+
+| **Property** | **Effect when false**  |
+| :- | :- |
+| allowList | Omits GET /path endpoint |
+| allowRead | Omits GET /path and GET /path/\{id\} endpoints |
+| allowCreate | Omits POST /path endpoint |
+| allowUpdate | Omits PUT /path/\{id\} endpoint |
+| allowDelete | Omits DELETE /path/\{id\} endpoints |
+| allowDeleteMany | Omits DELETE /path endpoints |
+
+Similarly, you can prevent association endpoints from generating through the following properties within each association object:
+
+| **Property** | **Effect when false**  |
+| - | :- |
+|allowAdd | omits POST /owner/\{ownerId\}/child and PUT /owner/\{ownerId\}/child/\{childId\} endpoints |
+|allowRemove | omits DELETE /owner/\{ownerId\}/child/\{childId\} endpoints |
+|allowRemoveMany | omits DELETE /owner/\{ownerId\}/child endpoints |
+|allowRead | omits GET /owner/\{ownerId\}/child endpoint |
+
+For example, a routeOption object that omits endpoints for creating objects and removing a association could look like this:
+
+```js
+user.routeOptions = {
+    allowCreate: false,
+    group: {
+        allowRemove: false,
+        allowRemoveMany: false
+    }
+}
+```
