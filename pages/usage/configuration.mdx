@@ -9,7 +9,7 @@ Configuration of crudsify is handled through the config/index.js file. Below is 
 * Your service name goes here
 * @type {string}
 */
-service: "APIs",
+service: "APIs"
 ```
 
 ## logDir
@@ -20,7 +20,7 @@ service: "APIs",
  * default: './logs/'
  * @type {string}
  */
-logDir: "./logs/";
+logDir: "./logs/"
 ```
 
 ## cors
@@ -31,8 +31,8 @@ logDir: "./logs/";
 * @type {{headers: string[], exposedHeaders: string[]}}
 */
 cors: {
-origin: "*",
-exposedHeaders: ["X-Access-Token", "X-Refresh-Token"],
+  origin: "*",
+  exposedHeaders: ["X-Access-Token", "X-Refresh-Token"],
 }
 ```
 
@@ -44,9 +44,9 @@ exposedHeaders: ["X-Access-Token", "X-Refresh-Token"],
 * default {name: "id", type: "BIGINT", autoIncrement: true}
 */
 dbPrimaryKey: {
-name: "id",
-type: "BIGINT",
-autoIncrement: true,
+  name: "id",
+  type: "BIGINT",
+  autoIncrement: true,
 }
 ```
 
@@ -57,7 +57,7 @@ autoIncrement: true,
 * default: false
 * @type {boolean}
 */
-absoluteModelPath: false,
+absoluteModelPath: false
 ```
 
 ## modelPath
@@ -67,7 +67,7 @@ absoluteModelPath: false,
 * default: 'models'
 * @type {string}
 */
-modelPath: "models",
+modelPath: "models"
 ```
 
 ## modelOptions
@@ -80,10 +80,10 @@ modelPath: "models",
 * - paranoid: (default: true) specifying a soft-deletion of records, instead of a hard-deletion
 * - deletedAt: Give a custom name to the deletedAt column
 */
-  modelOptions: {
-    timestamps: true,
-    paranoid: true,
-  },
+modelOptions: {
+  timestamps: true,
+  paranoid: true,
+}
 ```
 
 ## enableCreatedBy
@@ -98,9 +98,9 @@ modelPath: "models",
 * default: true
 * @type {boolean}
 */
-  enableCreatedBy: true,
-  enableUpdatedBy: true,
-  enableDeletedBy: true,
+enableCreatedBy: true
+enableUpdatedBy: true
+enableDeletedBy: true
 ```
 
 ## limit
@@ -110,7 +110,7 @@ modelPath: "models",
 * default: 20
 * @type {number}
 */
-  limit: 20,
+limit: 20
 ```
 
 ## authentication
@@ -120,7 +120,7 @@ modelPath: "models",
 * default: false
 * @type {boolean}
 */
-  authentication: false,
+authentication: false
 ```
 
 ## enableRecordScopes
@@ -130,7 +130,7 @@ modelPath: "models",
 * default: false
 * @type {boolean}
 */
-  enableRecordScopes: false,
+enableRecordScopes: false
 ```
 
 ## recordScopeKey
@@ -140,7 +140,7 @@ modelPath: "models",
 * default: recordScope
 * @type {string}
 */
-  recordScopeKey: "recordScope",
+recordScopeKey: "recordScope"
 ```
 
 ## authorizeRecordCreator
@@ -157,13 +157,13 @@ modelPath: "models",
 * default: false
 * @type {boolean}
 */
-  authorizeRecordCreator: {
-    root: false,
-    read: false,
-    update: false,
-    delete: false,
-    associate: false,
-  },
+authorizeRecordCreator: {
+  root: false,
+  read: false,
+  update: false,
+  delete: false,
+  associate: false,
+}
 ```
 
 ## generateRouteScopes
@@ -174,7 +174,7 @@ modelPath: "models",
 * default: false
 * @type {boolean}
 */
-  generateRouteScopes: true,
+generateRouteScopes: true
 ```
 
 ## saltRounds
@@ -184,7 +184,7 @@ modelPath: "models",
 * default: 10
 * @type {number}
 */
-  saltRounds: 10,
+saltRounds: 10
 ```
 
 ## logLevel
@@ -202,12 +202,12 @@ modelPath: "models",
 * default: verbose for uat
 * default: error for production
 */
-  logLevel: {
-    $filter: "env",
-    uat: "verbose",
-    production: "error",
-    $default: "silly",
-  },
+logLevel: {
+  $filter: "env",
+  uat: "verbose",
+  production: "error",
+  $default: "silly",
+}
 ```
 
 ## logRoutes
@@ -217,7 +217,7 @@ modelPath: "models",
 * default: false
 * @type {boolean}
 */
-  logRoutes: true,
+logRoutes: true
 ```
 
 ## logScopes
@@ -227,7 +227,7 @@ modelPath: "models",
 * default: false
 * @type {boolean}
 */
-  logScopes: false,
+logScopes: false
 ```
 
 ## logQuery
@@ -237,7 +237,7 @@ modelPath: "models",
 * default: false
 * @type {boolean}
 */
-  logQuery: false,
+logQuery: false
 ```
 
 ## enableAuditLog
@@ -247,7 +247,7 @@ modelPath: "models",
 * default: true
 * @type {boolean}
 */
-  enableAuditLog: true,
+enableAuditLog: true
 ```
 
 ## auditLogStorage
@@ -257,7 +257,7 @@ modelPath: "models",
 * default: "file"
 * available: "database" | "file"
 */
-  auditLogStorage: "file",
+auditLogStorage: "file"
 ```
 
 ## auditLogTTL
@@ -269,11 +269,11 @@ modelPath: "models",
 * default: null (does not expire)
 * @type {string}
 */
-  auditLogTTL: {
-    $filter: "env",
-    production: "60d",
-    $default: "20d",
-  },
+auditLogTTL: {
+  $filter: "env",
+  production: "60d",
+  $default: "20d",
+}
 ```
 
 ## enablePolicies
@@ -283,7 +283,7 @@ modelPath: "models",
 * default: false
 * @type {boolean}
 */
-  enablePolicies: false,
+enablePolicies: false
 ```
 
 ## enablePayloadValidation
@@ -295,8 +295,8 @@ modelPath: "models",
 * default: true
 * @type {boolean}
 */
-  enablePayloadValidation: true,
-  enableQueryValidation: true,
+enablePayloadValidation: true
+enableQueryValidation: true
 ```
 
 ## enableSwagger
@@ -306,11 +306,11 @@ modelPath: "models",
 * default: true for development & uat
 * default: false for production
 */
-  enableSwagger: {
-    $filter: "env",
-    production: false,
-    $default: true,
-  },
+enableSwagger: {
+  $filter: "env",
+  production: false,
+  $default: true,
+}
 ```
 
 ## swaggerOptions
@@ -320,13 +320,13 @@ modelPath: "models",
 * Options set here will override swagger config options below
 * @type {Object}
 */
+swaggerOptions: {
+  explorer: true,
   swaggerOptions: {
-    explorer: true,
-    swaggerOptions: {
-      docExpansion: "none",
-    },
-    customSiteTitle: process.env.TITLE,
+    docExpansion: "none",
   },
+  customSiteTitle: process.env.TITLE,
+}
 ```
 
 ## absoluteApiPath
@@ -336,7 +336,7 @@ modelPath: "models",
 * default: false
 * @type {boolean}
 */
-  absoluteApiPath: false,
+absoluteApiPath: false
 ```
 
 ## apiPath
@@ -346,7 +346,7 @@ modelPath: "models",
 * default: 'apis'
 * @type {string}
 */
-  apiPath: "apis",
+apiPath: "apis"
 ```
 
 ## absolutePluginPath
@@ -356,7 +356,7 @@ modelPath: "models",
 * default: false
 * @type {boolean}
 */
-  absolutePluginPath: false,
+absolutePluginPath: false
 ```
 
 ## pluginPath
@@ -366,5 +366,5 @@ modelPath: "models",
 * default: 'plugins'
 * @type {string}
 */
-  pluginPath: "plugins",
+pluginPath: "plugins"
 ```

@@ -1,0 +1,105 @@
+# Querying
+
+Query parameters can be added to GET requests to filter responses. These parameters are structured and function similar to mongoose queries. Below is a list of currently supported parameters:
+
+### $skip
+The number of records to skip in the database. This is typically used in pagination.
+
+### $page
+The number of records to skip based on the $limit parameter. This is typically used in pagination.
+
+### $limit
+The maximum number of records to return. This is typically used in pagination.
+
+### $select
+A list of basic fields to be included in each resource.
+
+### $sort
+A set of fields to sort by. Including field name indicates it should be sorted ascending, while prepending '-' indicates descending. The default sort direction is 'ascending' (lowest value to highest value). Listing multiple fields prioritizes the sort starting with the first field listed.
+
+### $exclude
+A list of Ids to exclude in the result.
+
+### $embed
+A set of associations to populate.
+
+### $count
+If set to true, only a count of the query results will be returned.
+
+## Pagination
+For any GET query that returns multiple documents, pagination data is returned alongside the documents. The response object has the form:
+
+* docs - an array of documents.
+* pages - an object where:
+    * current - a number indicating the current page.
+    * prev - a number indicating the previous page.
+    * hasPrev - a boolean indicating if there is a previous page.
+    * next - a number indicating the next page.
+    * hasNext - a boolean indicating if there is a next page.
+    * total - a number indicating the total number of pages.
+* items - an object where:
+    * limit - a number indicating the how many results should be returned.
+    * begin - a number indicating what item number the results begin with.
+    * end - a number indicating what item number the results end with.
+    * total - a number indicating the total number of matching results.
+
+## Populate nested associations
+Associations can be populated through the **$embed** parameter. To populate nested associations, simply chain a parameter with **.**. For example, consider the MANY_MANY group-user association. If we populate the users of a group with /group?$embed=user we might get a response like so:
+
+```json
+{
+    "id": "1",
+    "name": "A-team",
+    "users": [
+      {
+        "user": {
+          "id": "1",
+          "email": "user@crudsify.com",
+          "role": "1"
+        },
+        "id": "1"
+      },
+      {
+        "user": {
+          "id": "2",
+          "email": "user2@crudsify.com",
+          "role": "2"
+        },
+        "id": "2"
+      }
+    ]
+}
+```
+
+However we can further populate each user's **title** field with a nested **$embed** parameter: **/group?$embed=user.role** which could result in the following response:
+
+```json
+{
+    "id": "1",
+    "name": "A-team",
+    "users": [
+      {
+        "user": {
+          "id": "1",
+          "email": "user@crudsify.com",
+          "role": {
+            "id": "1",
+            "name": "Admin"
+          }
+        },
+        "id": "1"
+      },
+      {
+        "user": {
+          "id": "2",
+          "email": "user2@crudsify.com",
+          "role": {
+            "id": "2",
+            "name": "SuperAdmin"
+          }
+        },
+        "id": "2"
+      }
+    ]
+}
+```

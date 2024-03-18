@@ -1,0 +1,96 @@
+# Validation
+
+## Route validation
+Validation in the Crudsify framework is implemented with joi. This includes validation of headers, query parameters and payloads. joi validation models are based primarily on of each model's field properties. Below is a list of sequelize data types and their joi equivalent within Crudsify:
+
+| **Data Type** | **Joi validation** |
+| :- | :- |
+|TEXT | Joi.string() |
+|CITEXT | Joi.string() |
+|CHAR | Joi.string() |
+|CIDR | Joi.string() |
+|BLOB | Joi.string() |
+|STRING | Joi.string() |
+|INET | Joi.string() |
+|UUID | Joi.string() |
+|MACADDR | Joi.string() |
+|ENUM | Joi.string() |
+|BIGINT| Joi.number() |
+|DECIMAL| Joi.number() |
+|DOUBLE PRECISION| Joi.number() |
+|FLOAT| Joi.number() |
+|INTEGER| Joi.number() |
+|MEDIUMINT| Joi.number() |
+|NUMBER| Joi.number() |
+|REAL| Joi.number() |
+|SMALLINT| Joi.number() |
+|TINYINT| Joi.number() |
+|DATE| Joi.date() |
+|TIME| Joi.date() |
+|DATEONLY| Joi.date() |
+|BOOLEAN|Joi.bool() |
+
+Fields of type **String** can include further validation restrictions based on additional field properties as shown below:
+| **Field Property** | **Joi validation** |
+| :- | :- |
+|enum: [items]|Joi.string().valid(...[items])|
+|regex: RegExp|Joi.string().regex(RegExp)|
+|stringType: 'email'|Joi.string().email()|
+|stringType: 'uri'|Joi.string().uri()|
+|stringType: 'token'|Joi.string().token()|
+|stringType: 'base64'|Joi.string().base64()|
+|stringType: 'lowercase'|Joi.string().lowercase()|
+|stringType: 'uppercase'|Joi.string().uppercase()|
+|stringType: 'hostname'|Joi.string().hostname()|
+|stringType: 'hex'|Joi.string().hex()|
+|stringType: 'trim'|Joi.string().trim()|
+|stringType: 'creditCard'|Joi.string().creditCard()|
+
+In addition, if a **description: "Description text."** field property is included, then **.description("Description text.")** will be called on the joi validation object.
+
+Crudsify generates joi validation models for create, read, and update events as well as association events with linking models. By default these validation models include all the fields of the models and list them as optional. However additional field properties can be included to customize the validation models. Below is a list of currently supported field properties and their effect on the validation models.
+
+|**Field Property**|**Validation Model**|
+| :- | :- |
+|required: true|field required on create|
+|requireOnUpdate: true|field required on update|
+|allowOnRead: false|field excluded from read model|
+|allowOnUpdate: false|field excluded from update model|
+|allowOnCreate: false|field excluded from create model|
+|queryable: false|field cannot be included as a query parameter|
+|exclude: true|field cannot be included in a response or as part of a query|
+|allowNull: true|field accepts null as a valid value|
+
+## Using Joi in custom endpoints
+If you create standalone or additional endpoints, you must wrap validate properties in Joi.object as described in the notes.
+
+```js
+validate: {
+    body: Joi.object({
+      password: Joi.string().required().messages({
+        "any.required": "Password is required",
+        "string.empty": "Password can't be empty",
+      }),
+    }),
+}
+```
+
+## Joi helper methods
+
+Crudsify exposes the helper methods it uses to generate Joi models through the joiHelper property. Combined with the exposed wrapper methods, this allows you to easily create custom endpoints. You can see a description of these methods below:
+
+### generateJoiReadModel
+
+### generateJoiUpdateModel
+
+### generateJoiCreateModel
+
+### generateJoiListQueryModel
+
+### generateJoiFindQueryModel
+
+### generateJoiFieldModel
+
+### generateJoiModelFromFieldType
+
+### isValidField
