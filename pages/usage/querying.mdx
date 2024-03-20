@@ -27,9 +27,9 @@ A set of associations to populate.
 If set to true, only a count of the query results will be returned.
 
 ## Pagination
-For any GET query that returns multiple documents, pagination data is returned alongside the documents. The response object has the form:
+For any GET query that returns multiple records, pagination data is returned alongside the records. The response object has the form:
 
-* docs - an array of documents.
+* docs - an array of records.
 * pages - an object where:
     * current - a number indicating the current page.
     * prev - a number indicating the previous page.
@@ -44,7 +44,7 @@ For any GET query that returns multiple documents, pagination data is returned a
     * total - a number indicating the total number of matching results.
 
 ## Populate nested associations
-Associations can be populated through the **$embed** parameter. To populate nested associations, simply chain a parameter with **.**. For example, consider the MANY_MANY group-user association. If we populate the users of a group with /group?$embed=user we might get a response like so:
+Associations can be populated through the **$embed** parameter. To populate nested associations, simply chain a parameter with **.** for example, consider the MANY_MANY group-user association. If we populate the users of a group with **/group?$embed=user** we might get a response like so:
 
 ```json
 {
@@ -55,7 +55,7 @@ Associations can be populated through the **$embed** parameter. To populate nest
         "user": {
           "id": "1",
           "email": "user@crudsify.com",
-          "role": "1"
+          "group": "1"
         },
         "id": "1"
       },
@@ -63,7 +63,7 @@ Associations can be populated through the **$embed** parameter. To populate nest
         "user": {
           "id": "2",
           "email": "user2@crudsify.com",
-          "role": "2"
+          "group": "2"
         },
         "id": "2"
       }
@@ -71,7 +71,7 @@ Associations can be populated through the **$embed** parameter. To populate nest
 }
 ```
 
-However we can further populate each user's **title** field with a nested **$embed** parameter: **/group?$embed=user.role** which could result in the following response:
+However we can further populate each user's **title** field with a nested **$embed** parameter: **/group?$embed=user.group** which could result in the following response:
 
 ```json
 {
@@ -82,7 +82,7 @@ However we can further populate each user's **title** field with a nested **$emb
         "user": {
           "id": "1",
           "email": "user@crudsify.com",
-          "role": {
+          "group": {
             "id": "1",
             "name": "Admin"
           }
@@ -93,7 +93,7 @@ However we can further populate each user's **title** field with a nested **$emb
         "user": {
           "id": "2",
           "email": "user2@crudsify.com",
-          "role": {
+          "group": {
             "id": "2",
             "name": "SuperAdmin"
           }

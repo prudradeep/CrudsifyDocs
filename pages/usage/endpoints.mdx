@@ -1,13 +1,13 @@
 # Creating Endpoints
 
-Creating endpoints with crudsify can be accomplished in three different ways:
+Creating endpoints with Crudsify can be accomplished in three different ways:
 
 * generating endpoints based on model definitions
 * defining standalone endpoints
 * adding endpoints to a model
 
 ## Model endpoints
-Restful endpoints are automatically generated based on of any models that you add to your models directory with the file structure of \{model name\}.js. These models must adhere to the following format:
+Restful endpoints are automatically generated based on any models that you add to your **models** directory with the file structure of **\{model name\}.js**. These models must adhere to the Sequelize model definition (Prefer Extending model):
 
 ```js
 "use strict";
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
 }
 ```
 
-As a concrete example, here is a user model:
+As a concrete example, here is a role model:
 ```js filename="models/role.js"
 "use strict";
 const { Model } = require("sequelize");
@@ -78,19 +78,19 @@ module.exports = (sequelize, DataTypes) => {
 
 This will generate the following CRUD endpoints:
 ```
-DELETE /role                            Delete multiple roles
-POST /role                              Create one or more new roles
 GET /role                               Get a list of roles
-DELETE /role/{id}                       Delete a role
 GET /role/{id}                          Get a specific role
+POST /role                              Create one or more new roles
 PUT /role/{id}                          Update a role
+DELETE /role/{id}                       Delete a role
+DELETE /role                            Delete multiple roles
 ```
 Association endpoints can also be generated based on model definitions.
 ```
 GET /role/{ownerId}/user                Get all of the users for a role
 POST /role/{ownerId}/user               Add multiple users to a role
-DELETE /role/{ownerId}/user             Remove multiple users from a role's list of users
 PUT /role/{ownerId}/user/{childId}      Add a single user object to a role's list of users
+DELETE /role/{ownerId}/user             Remove multiple users from a role's list of users
 DELETE /role/{ownerId}/user/{childId}   Remove a single user object from a role's list of users
 ```
 
@@ -123,6 +123,8 @@ generateEndpoint({
 });
 ```
 
+~To do: Explain more of generateEndpoint.~
+
 As a concrete example, here is a hello-world endpoint that will show in the generated swagger docs:
 
 ```js filename="apis/hello.js"
@@ -151,7 +153,7 @@ generateEndpoint({
 
 ## Additional endpoints
 
-If endpoints beyond the generated CRUD endpoints are needed for a model, they can easily be added as an item in the **extraEndpoints** array of model. The endpoint logic should be contained within a function using the footprint: (). For example, if we wanted to add a Activatee user endpoint to the user model, it could look like this:
+If endpoints beyond the generated CRUD endpoints are needed for a model, they can easily be added as an item in the **extraEndpoints** array property of model. The endpoint logic should be contained within a function using the footprint: (). For example, if we wanted to add a Activate user endpoint to the user model, it could look like this:
 
 ```js filename="models/user.js"
 user.extraEndpoints = [

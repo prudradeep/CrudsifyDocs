@@ -2,20 +2,20 @@
 You need Node JS >= 18 installed.
 You should have a basic knowledge of [Sequelize](https://sequelize.org/) & [Sequelize Migrations](https://sequelize.org/docs/v6/other-topics/migrations/).
 ## Installation
-In your project directory, run:
+In project root directory, run following command:
 
 ```bash
 npm install https://github.com/prudradeep/crudsify.git#package
 ```
 ## Setup
-Create a new file index.js and add the following code to set-up an API with crudsify.
+Create a new file named **index.js** in the project root directory and add the following code to set-up an API server with Crudsify.
 
-```js filename="index.js"
+```js filename="index.js" showLineNumbers
 const server = require("crudsify");
 server();
 ```
-Create a new file .env for environment variables and add the following:
-```bash filename=".env"
+Create a new file named **.env** for environment variables and use the following:
+```bash filename=".env" showLineNumbers
 # development | uat | production
 NODE_ENV=development
 SERVER_PORT=8080

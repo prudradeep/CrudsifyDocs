@@ -1,16 +1,15 @@
 {
   "configuration": "Configuration",
   "endpoints": "Creating Endpoints",
-  "associations": "Association",
   "route": "Route Customization",
   "querying": "Querying",
   "validation": "Validation",
-  "middleware": "Middleware",
+  "middleware": "Model Middleware",
   "authentication": "Authentication",
   "authorization": "Authorization",
   "auditlogs": "Audit Logs",
   "policies": "Policies",
-  "methods": "Wrapper Methods",
+  "handlers": "Handlers",
   "softdelete": "Soft Delete",
   "metadata": "Metadata",
   "model": "Model Generation"

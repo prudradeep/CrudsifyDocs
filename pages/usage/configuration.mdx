@@ -1,6 +1,6 @@
 # Configuration
 
-Configuration of crudsify is handled through the config/index.js file. Below is a description of the current configuration options/properties.
+Configuration of Crudsify is handled through the **config/index.js** file. Below is a description of the default configuration options/properties.
 
 ## service
 
@@ -23,6 +23,83 @@ service: "APIs"
 logDir: "./logs/"
 ```
 
+## logLevel
+```js
+/**
+* Log level options:
+* - error
+* - warn
+* - info
+* - http
+* - verbose
+* - debug
+* - silly
+* default: silly for development
+* default: verbose for uat
+* default: error for production
+*/
+logLevel: {
+  $filter: "env",
+  uat: "verbose",
+  production: "error",
+  $default: "silly",
+}
+```
+
+## logRoutes
+```js
+/**
+* If set to true, each route will be logged as it is generated.
+* default: false
+* @type {boolean}
+*/
+logRoutes: false
+```
+
+## logScopes
+```js
+/**
+* If set to true, the scope for each endpoint will be logged when then endpoint is generated.
+* default: false
+* @type {boolean}
+*/
+logScopes: false
+```
+
+## logQuery
+```js
+/**
+* If set to true, the queries will be logged.
+* default: false
+* @type {boolean}
+*/
+logQuery: false
+```
+
+## logTTL
+```js
+/**
+* Maximum number of logs to keep.
+* This can be a number of files or number of days. 
+* If using days, add 'd' as the suffix.
+* default: "20d"
+* @type {string}
+*/
+logTTL: "20d"
+```
+
+## logFileMaxSize
+```js
+/**
+* Maximum size of the log file after which it will rotate.
+* This can be a number of bytes, or units of kb, mb, and gb. 
+* If using the units, add 'k', 'm', or 'g' as the suffix.
+* default: "20m"
+* @type {string}
+*/
+logFileMaxSize: "20m"
+```
+
 ## cors
 
 ```js
@@ -34,6 +111,26 @@ cors: {
   origin: "*",
   exposedHeaders: ["X-Access-Token", "X-Refresh-Token"],
 }
+```
+
+## authentication
+```js
+/**
+* Authentication to be used for all generated endpoints.
+* default: false
+* @type {boolean}
+*/
+authentication: false
+```
+
+## saltRounds
+```js
+/**
+* Salt rounds for generating hash
+* default: 10
+* @type {number}
+*/
+saltRounds: 10
 ```
 
 ## dbPrimaryKey
@@ -113,16 +210,6 @@ enableDeletedBy: true
 limit: 20
 ```
 
-## authentication
-```js
-/**
-* Authentication to be used for all generated endpoints.
-* default: false
-* @type {boolean}
-*/
-authentication: false
-```
-
 ## enableRecordScopes
 ```js
 /**
@@ -136,7 +223,8 @@ enableRecordScopes: false
 ## recordScopeKey
 ```js
 /**
-* If set, (and enableRecordScopes is not false) then recordScopeKey will be added in the model definition.
+* If set, (and enableRecordScopes is not false) then recordScopeKey will be 
+* added in the model definition.
 * default: recordScope
 * @type {string}
 */
@@ -146,14 +234,18 @@ recordScopeKey: "recordScope"
 ## authorizeRecordCreator
 ```js
 /**
-* If properties are true, modifies the scope of any record to allow access to the record's creator.
-* The scope value added is in the form: "user-{dbPrimaryKey}" where "{dbPrimaryKey}" is the primary key of the user.
+* If properties are true, modifies the scope of any record to allow access to the 
+* record's creator.
+* The scope value added is in the form: "user-{dbPrimaryKey}" where "{dbPrimaryKey}" 
+* is the primary key of the user.
 * NOTE:
 * - This assumes that your authentication credentials (req.auth.credentials) will contain either
 * a "user" object with a "dbPrimaryKey" property.
-* - This also assumes that the user creating the record will have "user-{dbPrimaryKey}" within their scope.
+* - This also assumes that the user creating the record will have "user-{dbPrimaryKey}" 
+* within their scope.
 * - Requires "enableRecordScopes" to be "true".
-* - This setting can be individually overwritten by setting the "authorizeRecordCreator" property of the model.
+* - This setting can be individually overwritten by setting the respective properties in
+* "authorizeRecordCreator" property of the model.
 * default: false
 * @type {boolean}
 */
@@ -175,69 +267,6 @@ authorizeRecordCreator: {
 * @type {boolean}
 */
 generateRouteScopes: true
-```
-
-## saltRounds
-```js
-/**
-* Salt rounds for generating hash
-* default: 10
-* @type {number}
-*/
-saltRounds: 10
-```
-
-## logLevel
-```js
-/**
-* Log level options:
-* - error
-* - warn
-* - info
-* - http
-* - verbose
-* - debug
-* - silly
-* default: silly for development
-* default: verbose for uat
-* default: error for production
-*/
-logLevel: {
-  $filter: "env",
-  uat: "verbose",
-  production: "error",
-  $default: "silly",
-}
-```
-
-## logRoutes
-```js
-/**
-* If set to true, each route will be logged as it is generated.
-* default: false
-* @type {boolean}
-*/
-logRoutes: true
-```
-
-## logScopes
-```js
-/**
-* If set to true, the scope for each endpoint will be logged when then endpoint is generated.
-* default: false
-* @type {boolean}
-*/
-logScopes: false
-```
-
-## logQuery
-```js
-/**
-* If set to true, the queries will be logged.
-* default: false
-* @type {boolean}
-*/
-logQuery: false
 ```
 
 ## enableAuditLog
@@ -263,10 +292,11 @@ auditLogStorage: "file"
 ## auditLogTTL
 ```js
 /**
-* Specifies the TTL (time to live/lifetime/expiration) of auditLog records. Accepts values in seconds unless specified
-* (Ex: 60 = 60 seconds, '1m' = 1 minute, or '1d' = 1 day)
-* See: http://nicoll.io/mongottl/
-* default: null (does not expire)
+* Maximum number of logs to keep. 
+* This can be a number of files or number of days. 
+* If using days, add 'd' as the suffix.
+* default: 20d for development & uat
+* default: 60d for production
 * @type {string}
 */
 auditLogTTL: {
@@ -316,7 +346,8 @@ enableSwagger: {
 ## swaggerOptions
 ```js
 /**
-* Set swagger options as per https://github.com/swagger-api/swagger-ui/blob/master/docs/usage/configuration.md
+* Set swagger options as per 
+* https://github.com/swagger-api/swagger-ui/blob/master/docs/usage/configuration.md
 * Options set here will override swagger config options below
 * @type {Object}
 */

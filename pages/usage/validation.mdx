@@ -1,7 +1,7 @@
 # Validation
 
 ## Route validation
-Validation in the Crudsify framework is implemented with joi. This includes validation of headers, query parameters and payloads. joi validation models are based primarily on of each model's field properties. Below is a list of sequelize data types and their joi equivalent within Crudsify:
+Validation in the Crudsify framework is implemented with Joi. This includes validation of headers, query parameters and payloads. Joi validation models are based primarily on of each model's field properties. Below is a list of sequelize data types and their joi equivalent within Crudsify:
 
 | **Data Type** | **Joi validation** |
 | :- | :- |
@@ -62,7 +62,7 @@ Crudsify generates joi validation models for create, read, and update events as 
 |allowNull: true|field accepts null as a valid value|
 
 ## Using Joi in custom endpoints
-If you create standalone or additional endpoints, you must wrap validate properties in Joi.object as described in the notes.
+If you create standalone or additional endpoints, you must wrap validate properties in Joi.object as described below:
 
 ```js
 validate: {
