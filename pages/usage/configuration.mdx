@@ -2,17 +2,17 @@
 
 Configuration of Crudsify is handled through the **config/index.js** file. Below is a description of the default configuration options/properties.
 
-## service
+### service
 
 ```js
 /**
-* Your service name goes here
-* @type {string}
-*/
-service: "APIs"
+ * Your service name goes here
+ * @type {string}
+ */
+service: "APIs";
 ```
 
-## logDir
+### logDir
 
 ```js
 /**
@@ -20,10 +20,11 @@ service: "APIs"
  * default: './logs/'
  * @type {string}
  */
-logDir: "./logs/"
+logDir: "./logs/";
 ```
 
-## logLevel
+### logLevel
+
 ```js
 /**
 * Log level options:
@@ -46,61 +47,66 @@ logLevel: {
 }
 ```
 
-## logRoutes
+### logRoutes
+
 ```js
 /**
-* If set to true, each route will be logged as it is generated.
-* default: false
-* @type {boolean}
-*/
-logRoutes: false
+ * If set to true, each route will be logged as it is generated.
+ * default: false
+ * @type {boolean}
+ */
+logRoutes: false;
 ```
 
-## logScopes
+### logScopes
+
 ```js
 /**
-* If set to true, the scope for each endpoint will be logged when then endpoint is generated.
-* default: false
-* @type {boolean}
-*/
-logScopes: false
+ * If set to true, the scope for each endpoint will be logged when then endpoint is generated.
+ * default: false
+ * @type {boolean}
+ */
+logScopes: false;
 ```
 
-## logQuery
+### logQuery
+
 ```js
 /**
-* If set to true, the queries will be logged.
-* default: false
-* @type {boolean}
-*/
-logQuery: false
+ * If set to true, the queries will be logged.
+ * default: false
+ * @type {boolean}
+ */
+logQuery: false;
 ```
 
-## logTTL
+### logTTL
+
 ```js
 /**
-* Maximum number of logs to keep.
-* This can be a number of files or number of days. 
-* If using days, add 'd' as the suffix.
-* default: "20d"
-* @type {string}
-*/
-logTTL: "20d"
+ * Maximum number of logs to keep.
+ * This can be a number of files or number of days.
+ * If using days, add 'd' as the suffix.
+ * default: "20d"
+ * @type {string}
+ */
+logTTL: "20d";
 ```
 
-## logFileMaxSize
+### logFileMaxSize
+
 ```js
 /**
-* Maximum size of the log file after which it will rotate.
-* This can be a number of bytes, or units of kb, mb, and gb. 
-* If using the units, add 'k', 'm', or 'g' as the suffix.
-* default: "20m"
-* @type {string}
-*/
-logFileMaxSize: "20m"
+ * Maximum size of the log file after which it will rotate.
+ * This can be a number of bytes, or units of kb, mb, and gb.
+ * If using the units, add 'k', 'm', or 'g' as the suffix.
+ * default: "20m"
+ * @type {string}
+ */
+logFileMaxSize: "20m";
 ```
 
-## cors
+### cors
 
 ```js
 /**
@@ -113,27 +119,29 @@ cors: {
 }
 ```
 
-## authentication
+### authentication
+
 ```js
 /**
-* Authentication to be used for all generated endpoints.
-* default: false
-* @type {boolean}
-*/
-authentication: false
+ * Authentication to be used for all generated endpoints.
+ * default: false
+ * @type {boolean}
+ */
+authentication: false;
 ```
 
-## saltRounds
+### saltRounds
+
 ```js
 /**
-* Salt rounds for generating hash
-* default: 10
-* @type {number}
-*/
-saltRounds: 10
+ * Salt rounds for generating hash
+ * default: 10
+ * @type {number}
+ */
+saltRounds: 10;
 ```
 
-## dbPrimaryKey
+### dbPrimaryKey
 
 ```js
 /**
@@ -147,27 +155,30 @@ dbPrimaryKey: {
 }
 ```
 
-## absoluteModelPath
+### absoluteModelPath
+
 ```js
 /**
-* Flag signifying whether the absolute path to the models directory is provided
-* default: false
-* @type {boolean}
-*/
-absoluteModelPath: false
+ * Flag signifying whether the absolute path to the models directory is provided
+ * default: false
+ * @type {boolean}
+ */
+absoluteModelPath: false;
 ```
 
-## modelPath
+### modelPath
+
 ```js
 /**
-* Path to the models directory
-* default: 'models'
-* @type {string}
-*/
-modelPath: "models"
+ * Path to the models directory
+ * default: 'models'
+ * @type {string}
+ */
+modelPath: "models";
 ```
 
-## modelOptions
+### modelOptions
+
 ```js
 /**
 * Timestamps options:
@@ -183,65 +194,72 @@ modelOptions: {
 }
 ```
 
-## enableCreatedBy
-## enableUpdatedBy
-## enableDeletedBy
+### enableCreatedBy
+
+### enableUpdatedBy
+
+### enableDeletedBy
+
 ```js
 /**
-* MetaData options
-* - createdBy: dbPrimaryKey of user that created the record.
-* - updatedBy: dbPrimaryKey of user that last updated the record.
-* - deletedBy: dbPrimaryKey of user that soft deleted the record.
-* default: true
-* @type {boolean}
-*/
-enableCreatedBy: true
-enableUpdatedBy: true
-enableDeletedBy: true
+ * MetaData options
+ * - createdBy: dbPrimaryKey of user that created the record.
+ * - updatedBy: dbPrimaryKey of user that last updated the record.
+ * - deletedBy: dbPrimaryKey of user that soft deleted the record.
+ * default: true
+ * @type {boolean}
+ */
+enableCreatedBy: true;
+enableUpdatedBy: true;
+enableDeletedBy: true;
 ```
 
-## limit
+### limit
+
 ```js
 /**
-* Default limit to fetch records
-* default: 20
-* @type {number}
-*/
-limit: 20
+ * Default limit to fetch records
+ * default: 20
+ * @type {number}
+ */
+limit: 20;
 ```
 
-## enableRecordScopes
+### enableRecordScopes
+
 ```js
 /**
-* Enables record level authorization.
-* default: false
-* @type {boolean}
-*/
-enableRecordScopes: false
+ * Enables record level authorization.
+ * default: false
+ * @type {boolean}
+ */
+enableRecordScopes: false;
 ```
 
-## recordScopeKey
+### recordScopeKey
+
 ```js
 /**
-* If set, (and enableRecordScopes is not false) then recordScopeKey will be 
-* added in the model definition.
-* default: recordScope
-* @type {string}
-*/
-recordScopeKey: "recordScope"
+ * If set, (and enableRecordScopes is not false) then recordScopeKey will be
+ * added in the model definition.
+ * default: recordScope
+ * @type {string}
+ */
+recordScopeKey: "recordScope";
 ```
 
-## authorizeRecordCreator
+### authorizeRecordCreator
+
 ```js
 /**
-* If properties are true, modifies the scope of any record to allow access to the 
+* If properties are true, modifies the scope of any record to allow access to the
 * record's creator.
-* The scope value added is in the form: "user-{dbPrimaryKey}" where "{dbPrimaryKey}" 
+* The scope value added is in the form: "user-{dbPrimaryKey}" where "{dbPrimaryKey}"
 * is the primary key of the user.
 * NOTE:
 * - This assumes that your authentication credentials (req.auth.credentials) will contain either
 * a "user" object with a "dbPrimaryKey" property.
-* - This also assumes that the user creating the record will have "user-{dbPrimaryKey}" 
+* - This also assumes that the user creating the record will have "user-{dbPrimaryKey}"
 * within their scope.
 * - Requires "enableRecordScopes" to be "true".
 * - This setting can be individually overwritten by setting the respective properties in
@@ -258,42 +276,46 @@ authorizeRecordCreator: {
 }
 ```
 
-## generateRouteScopes
+### generateRouteScopes
+
 ```js
 /**
-* If set to true, (and authentication is not false) then endpoints will be generated with pre-defined
-* scopes based on the model definition.
-* default: false
-* @type {boolean}
-*/
-generateRouteScopes: true
+ * If set to true, (and authentication is not false) then endpoints will be generated with pre-defined
+ * scopes based on the model definition.
+ * default: false
+ * @type {boolean}
+ */
+generateRouteScopes: true;
 ```
 
-## enableAuditLog
+### enableAuditLog
+
 ```js
 /**
-* When enabled, all create, update, associate, and delete events are recorded.
-* default: true
-* @type {boolean}
-*/
-enableAuditLog: true
+ * When enabled, all create, update, associate, and delete events are recorded.
+ * default: true
+ * @type {boolean}
+ */
+enableAuditLog: true;
 ```
 
-## auditLogStorage
+### auditLogStorage
+
 ```js
 /**
-* Specifies audit log storage
-* default: "file"
-* available: "database" | "file"
-*/
-auditLogStorage: "file"
+ * Specifies audit log storage
+ * default: "file"
+ * available: "database" | "file"
+ */
+auditLogStorage: "file";
 ```
 
-## auditLogTTL
+### auditLogTTL
+
 ```js
 /**
-* Maximum number of logs to keep. 
-* This can be a number of files or number of days. 
+* Maximum number of logs to keep.
+* This can be a number of files or number of days.
 * If using days, add 'd' as the suffix.
 * default: 20d for development & uat
 * default: 60d for production
@@ -306,30 +328,33 @@ auditLogTTL: {
 }
 ```
 
-## enablePolicies
-```js
-/**
-* Enables policies
-* default: false
-* @type {boolean}
-*/
-enablePolicies: false
-```
-
-## enablePayloadValidation
-## enableQueryValidation
+### enablePolicies
 
 ```js
 /**
-* Validation options:
-* default: true
-* @type {boolean}
-*/
-enablePayloadValidation: true
-enableQueryValidation: true
+ * Enables policies
+ * default: false
+ * @type {boolean}
+ */
+enablePolicies: false;
 ```
 
-## enableSwagger
+### enablePayloadValidation
+
+### enableQueryValidation
+
+```js
+/**
+ * Validation options:
+ * default: true
+ * @type {boolean}
+ */
+enablePayloadValidation: true;
+enableQueryValidation: true;
+```
+
+### enableSwagger
+
 ```js
 /**
 * When enabled, swagger ui will be generated for the apis.
@@ -343,10 +368,11 @@ enableSwagger: {
 }
 ```
 
-## swaggerOptions
+### swaggerOptions
+
 ```js
 /**
-* Set swagger options as per 
+* Set swagger options as per
 * https://github.com/swagger-api/swagger-ui/blob/master/docs/usage/configuration.md
 * Options set here will override swagger config options below
 * @type {Object}
@@ -360,42 +386,55 @@ swaggerOptions: {
 }
 ```
 
-## absoluteApiPath
+### absoluteApiPath
+
 ```js
 /**
-* Flag signifying whether the absolute path to the apis directory is provided
-* default: false
-* @type {boolean}
-*/
-absoluteApiPath: false
+ * Flag signifying whether the absolute path to the apis directory is provided
+ * default: false
+ * @type {boolean}
+ */
+absoluteApiPath: false;
 ```
 
-## apiPath
+### apiPath
+
 ```js
 /**
-* Path to the apis directory
-* default: 'apis'
-* @type {string}
-*/
-apiPath: "apis"
+ * Path to the apis directory
+ * default: 'apis'
+ * @type {string}
+ */
+apiPath: "apis";
 ```
 
-## absolutePluginPath
+### absolutePluginPath
+
 ```js
 /**
-* Flag signifying whether the absolute path to the plugins directory is provided
-* default: false
-* @type {boolean}
-*/
-absolutePluginPath: false
+ * Flag signifying whether the absolute path to the plugins directory is provided
+ * default: false
+ * @type {boolean}
+ */
+absolutePluginPath: false;
 ```
 
-## pluginPath
+### pluginPath
+
 ```js
 /**
-* Path to the plugins directory
-* default: 'plugins'
-* @type {string}
-*/
-pluginPath: "plugins"
+ * Path to the plugins directory
+ * default: 'plugins'
+ * @type {string}
+ */
+pluginPath: "plugins";
+```
+
+## Get any configuration property value
+
+Example:
+
+```js
+const configStore = require("crudsify/config");
+const authentication = configStore.get("/authentication");
 ```

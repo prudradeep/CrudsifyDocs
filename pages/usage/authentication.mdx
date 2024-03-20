@@ -1,32 +1,58 @@
 # Authentication
 
-## Route authentication
+## Model route authentication
+
 Authentication for generated endpoints is configured through **authentication** property in **config/index.js**. If this property is set to true, then the supplied auth strategy is applied to all generated endpoints by default. For a working example of authentication with Crudsify, see the Quick start.
 
 You can disable authentication for generated CRUD endpoints by setting the correct property to **false** within the **routeOptions** object. Below is a list of properties and the endpoints they affect:
 
-|**Property**|**Affected endpoints when false**|
-| :- | :- |
-|readAuth|GET /path and GET /path/\{id\} endpoints|
-|createAuth|POST /path endpoint|
-|updateAuth|PUT /path/\{id\} endpoint|
-|deleteAuth|DELETE /path and DELETE /path/\{id\} endpoints|
+| **Property** | **Affected endpoints when false**              |
+| :----------- | :--------------------------------------------- |
+| readAuth     | GET /path and GET /path/\{id\} endpoints       |
+| createAuth   | POST /path endpoint                            |
+| updateAuth   | PUT /path/\{id\} endpoint                      |
+| deleteAuth   | DELETE /path and DELETE /path/\{id\} endpoints |
 
 Similarly, you can disable authentication for generated association endpoints through the following properties within each association object:
 
-|**Property**|**Affected endpoints when false**|
-| :- | :- |
-|addAuth|POST /owner/\{ownerId\}/child and PUT /owner/\{ownerId\}/child/\{childId\} endpoints|
-|removeAuth|DELETE /owner/\{ownerId\}/child and DELETE /owner/\{ownerId\}/child/\{childId\} endpoints|
-|readAuth|GET /owner/\{ownerId\}/child endpoint|
+| **Property** | **Affected endpoints when false**                                                         |
+| :----------- | :---------------------------------------------------------------------------------------- |
+| addAuth      | POST /owner/\{ownerId\}/child and PUT /owner/\{ownerId\}/child/\{childId\} endpoints      |
+| removeAuth   | DELETE /owner/\{ownerId\}/child and DELETE /owner/\{ownerId\}/child/\{childId\} endpoints |
+| readAuth     | GET /owner/\{ownerId\}/child endpoint                                                     |
 
 For example, a routeOption object that disables authentication for creating objects and removing a specific association could look like this:
 
 ```js
 routeOptions: {
     createAuth: false,
-    users: {
-        removeAuth: false
+    group: {
+      removeAuth: false,
     }
 }
+```
+
+## Standalone endpoints authentication
+
+## Additional endpoints authentication
+
+To enable authentication, in the **generateEndpoint** method pass **auth** property true or use a config property authentication.
+
+```js
+const { generateEndpoint } = require("crudsify/endpoints/generate");
+const configStore = require("crudsify/config");
+const authentication = configStore.get("/authentication");
+
+generateEndpoint({
+  ...
+  auth: authentication,
+  ...
+});
+
+// or
+generateEndpoint({
+  ...
+  auth: true,
+  ...
+});
 ```

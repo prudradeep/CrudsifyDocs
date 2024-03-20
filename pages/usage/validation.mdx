@@ -1,34 +1,35 @@
 # Validation
 
 ## Route validation
-Validation in the Crudsify framework is implemented with Joi. This includes validation of headers, query parameters and payloads. Joi validation models are based primarily on of each model's field properties. Below is a list of sequelize data types and their joi equivalent within Crudsify:
 
-| **Data Type** | **Joi validation** |
-| :- | :- |
-|TEXT | Joi.string() |
-|CITEXT | Joi.string() |
-|CHAR | Joi.string() |
-|CIDR | Joi.string() |
-|BLOB | Joi.string() |
-|STRING | Joi.string() |
-|INET | Joi.string() |
-|UUID | Joi.string() |
-|MACADDR | Joi.string() |
-|ENUM | Joi.string() |
-|BIGINT| Joi.number() |
-|DECIMAL| Joi.number() |
-|DOUBLE PRECISION| Joi.number() |
-|FLOAT| Joi.number() |
-|INTEGER| Joi.number() |
-|MEDIUMINT| Joi.number() |
-|NUMBER| Joi.number() |
-|REAL| Joi.number() |
-|SMALLINT| Joi.number() |
-|TINYINT| Joi.number() |
-|DATE| Joi.date() |
-|TIME| Joi.date() |
-|DATEONLY| Joi.date() |
-|BOOLEAN|Joi.bool() |
+Validation in the Crudsify framework is implemented with Joi. This includes validation of headers, param/s, query and body. Joi validation models are based primarily on of each model's field properties. Below is a list of sequelize data types and their joi equivalent within Crudsify:
+
+| **Data Type**    | **Joi validation** |
+| :--------------- | :----------------- |
+| TEXT             | Joi.string()       |
+| CITEXT           | Joi.string()       |
+| CHAR             | Joi.string()       |
+| CIDR             | Joi.string()       |
+| BLOB             | Joi.string()       |
+| STRING           | Joi.string()       |
+| INET             | Joi.string()       |
+| UUID             | Joi.string()       |
+| MACADDR          | Joi.string()       |
+| ENUM             | Joi.string()       |
+| BIGINT           | Joi.number()       |
+| DECIMAL          | Joi.number()       |
+| DOUBLE PRECISION | Joi.number()       |
+| FLOAT            | Joi.number()       |
+| INTEGER          | Joi.number()       |
+| MEDIUMINT        | Joi.number()       |
+| NUMBER           | Joi.number()       |
+| REAL             | Joi.number()       |
+| SMALLINT         | Joi.number()       |
+| TINYINT          | Joi.number()       |
+| DATE             | Joi.date()         |
+| TIME             | Joi.date()         |
+| DATEONLY         | Joi.date()         |
+| BOOLEAN          | Joi.bool()         |
 
 Fields of type **String** can include further validation restrictions based on additional field properties as shown below:
 | **Field Property** | **Joi validation** |
@@ -50,19 +51,17 @@ In addition, if a **description: "Description text."** field property is include
 
 Crudsify generates joi validation models for create, read, and update events as well as association events with linking models. By default these validation models include all the fields of the models and list them as optional. However additional field properties can be included to customize the validation models. Below is a list of currently supported field properties and their effect on the validation models.
 
-|**Field Property**|**Validation Model**|
-| :- | :- |
-|required: true|field required on create|
-|requireOnUpdate: true|field required on update|
-|allowOnRead: false|field excluded from read model|
-|allowOnUpdate: false|field excluded from update model|
-|allowOnCreate: false|field excluded from create model|
-|queryable: false|field cannot be included as a query parameter|
-|exclude: true|field cannot be included in a response or as part of a query|
-|allowNull: true|field accepts null as a valid value|
+| **Field Property**    | **Validation Model**                          |
+| :-------------------- | :-------------------------------------------- |
+| allowNull: false      | field required on create                      |
+| requireOnUpdate: true | field required on update                      |
+| allowOnUpdate: false  | field excluded from update model              |
+| allowOnCreate: false  | field excluded from create model              |
+| queryable: false      | field cannot be included as a query parameter |
 
 ## Using Joi in custom endpoints
-If you create standalone or additional endpoints, you must wrap validate properties in Joi.object as described below:
+
+If you create standalone or additional endpoints, you must wrap validate properties in Joi.object for body, param/s or query as described below:
 
 ```js
 validate: {
@@ -72,6 +71,9 @@ validate: {
         "string.empty": "Password can't be empty",
       }),
     }),
+    params: Joi.object({
+      id: Joi.number().required(),
+    })
 }
 ```
 
@@ -79,18 +81,135 @@ validate: {
 
 Crudsify exposes the helper methods it uses to generate Joi models through the joiHelper property. Combined with the exposed wrapper methods, this allows you to easily create custom endpoints. You can see a description of these methods below:
 
-### generateJoiReadModel
-
-### generateJoiUpdateModel
-
-### generateJoiCreateModel
-
 ### generateJoiListQueryModel
+
+```js
+/**
+ * Generates a Joi object that validates a request query for the list function
+ * @param model: A model object.
+ * @returns {*}: A Joi object
+ */
+const generateJoiListQueryModel = (model) => {...}
+```
 
 ### generateJoiFindQueryModel
 
-### generateJoiFieldModel
+```js
+/**
+ * Generates a Joi object that validates a request query for the find function
+ * @param model: A model object.
+ * @returns {*}: A Joi object
+ */
+const generateJoiFindQueryModel = (model) => {...}
+```
+
+### generateJoiCreateModel
+
+```js
+/**
+ * Generates a Joi object that validates a request payload for creating a record
+ * @param model: A model object.
+ * @param assoc: An association create
+ * @param keys: An array of key fields
+ * @returns {*}: A Joi object
+ */
+const generateJoiCreateModel = (model, assoc = false, keys = []) => {...};
+```
+
+### generateJoiUpdateModel
+
+```js
+/**
+ * Generates a Joi object that validates a query request payload for updating a record
+ * @param model: A model object.
+ * @param keys: An array of key fields
+ * @returns {*}: A Joi object
+ */
+generateJoiUpdateModel = (model, keys = []) => {...};
+```
 
 ### generateJoiModelFromFieldType
 
+```js
+/**
+ * Returns a Joi object based on the field type.
+ * @param field: A field from a model.
+ * @returns {*}: A Joi object.
+ */
+const generateJoiModelFromFieldType = function (field) {...}
+```
+
 ### isValidField
+
+```js
+/**
+ * Checks to see if a field is a valid model property
+ * @param fieldName: The name of the field
+ * @param field: The field being checked
+ * @param keys: An array of key fields
+ * @returns {boolean}
+ */
+const isValidField = (fieldName, field, keys = []) => {...}
+```
+
+## Sequelize Validators
+
+Model validators allow you to specify format/content/inheritance validations for each attribute of the model. Validations are automatically run on **create**, **update** and **save**. You can also call **validate()** to manually validate an instance.
+If a validation fails, no SQL query will be sent to the database at all.
+
+### Per-attribute validations
+
+```js
+bar: {
+    type: DataTypes.STRING,
+    validate: {
+      is: /^[a-z]+$/i,          // matches this RegExp
+      is: ["^[a-z]+$",'i'],     // same as above, but constructing the RegExp from a string
+      not: /^[a-z]+$/i,         // does not match this RegExp
+      not: ["^[a-z]+$",'i'],    // same as above, but constructing the RegExp from a string
+      isEmail: true,            // checks for email format (foo@bar.com)
+      isUrl: true,              // checks for url format (https://foo.com)
+      isIP: true,               // checks for IPv4 (129.89.23.1) or IPv6 format
+      isIPv4: true,             // checks for IPv4 (129.89.23.1)
+      isIPv6: true,             // checks for IPv6 format
+      isAlpha: true,            // will only allow letters
+      isAlphanumeric: true,     // will only allow alphanumeric characters, so "_abc" will fail
+      isNumeric: true,          // will only allow numbers
+      isInt: true,              // checks for valid integers
+      isFloat: true,            // checks for valid floating point numbers
+      isDecimal: true,          // checks for any numbers
+      isLowercase: true,        // checks for lowercase
+      isUppercase: true,        // checks for uppercase
+      notNull: true,            // won't allow null
+      isNull: true,             // only allows null
+      notEmpty: true,           // don't allow empty strings
+      equals: 'specific value', // only allow a specific value
+      contains: 'foo',          // force specific substrings
+      notIn: [['foo', 'bar']],  // check the value is not one of these
+      isIn: [['foo', 'bar']],   // check the value is one of these
+      notContains: 'bar',       // don't allow specific substrings
+      len: [2,10],              // only allow values with length between 2 and 10
+      isUUID: 4,                // only allow uuids
+      isDate: true,             // only allow date strings
+      isAfter: "2011-11-05",    // only allow date strings after a specific date
+      isBefore: "2011-11-05",   // only allow date strings before a specific date
+      max: 23,                  // only allow values <= 23
+      min: 23,                  // only allow values >= 23
+      isCreditCard: true,       // check for valid credit card numbers
+
+      // Examples of custom validators:
+      isEven(value) {
+        if (parseInt(value) % 2 !== 0) {
+          throw new Error('Only even values are allowed!');
+        }
+      }
+      isGreaterThanOtherField(value) {
+        if (parseInt(value) <= parseInt(this.otherField)) {
+          throw new Error('Bar must be greater than otherField.');
+        }
+      }
+    }
+  }
+```
+
+For more details please check [Sequelize validations](https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/)

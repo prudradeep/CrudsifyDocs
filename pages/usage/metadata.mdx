@@ -1,0 +1,65 @@
+# Metadata
+
+## Timestamps
+
+Crudsify supports the following optional timestamp metadata for records:
+
+- createdAt (default enabled)
+- updatedAt (default enabled)
+- deletedAt (default enabled) (see [Soft delete](./softdelete))
+  When **modelOptions.timestamps** is enabled, these properties will automatically be populated during CRUD operations. For example, say I create a group with a payload of:
+
+  ```json
+  {
+    "name": "Group",
+    "description": "Group description"
+  }
+  ```
+
+  If I then query for this record I might get:
+
+  ```json
+  [
+    {
+      "id": 4,
+      "name": "Group",
+      "description": "Group description"
+      "createdAt": "2024-03-20T19:27:47.000Z",
+    }
+  ]
+  ```
+
+  If I later update that group's description then an additional query might return:
+
+  ```json
+  {
+    "id": 4,
+    "name": "Group",
+    "description": "Updated",
+    "createdAt": "2024-03-20T19:27:47.000Z",
+    "updatedAt": "2024-03-20T19:32:30.000Z"
+  }
+  ```
+
+  The **deletedAt** property marks when a record was soft deleted.
+
+### Custom names
+
+You can give custom names to the timestamps metadata by setting following properties of [**modelOptions**](./configuration#modeloptions) in configuration:
+
+- createdAt
+- updatedAt
+- deletedAt
+
+## User tags
+
+In addition to timestamps, the following user tag metadata can be added to a record:
+
+- createdBy (default disabled, activated via enableCreatedBy property in configuration)
+- updatedBy (default disabled, activated via enableUpdatedBy property in configuration)
+- deletedBy (default disabled, activated via enableDeletedBy property in configuration) (see [Soft delete](./softdelete))
+- If enabled, these properties will record the id of the user performing the corresponding action.
+
+This assumes that your authentication credentials (req.auth.credentials) will contain either a **user** object with a **dbPrimaryKey** property.
+
+> **NOTE**: Unlike timestamp metadata, user tag properties are only set/updated if the record is created/modified using Crudsify endpoints, (not [Crudsify handlers](./handlers)).

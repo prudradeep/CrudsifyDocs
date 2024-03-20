@@ -11,6 +11,5 @@
   "policies": "Policies",
   "handlers": "Handlers",
   "softdelete": "Soft Delete",
-  "metadata": "Metadata",
-  "model": "Model Generation"
+  "metadata": "Metadata"
 }

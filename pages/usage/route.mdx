@@ -10,8 +10,8 @@ By default route paths are constructed using model names, however aliases can be
 ```js filename="models/user.js"
 user.routeOptions = {
   alias: "person",
-  role: {
-    group: "category",
+  group: {
+    alias: "category",
   },
 };
 ```
@@ -36,31 +36,31 @@ DELETE /person/{ownerId}/category/{childId}
 
 You can prevent CRUD endpoints from generating by setting the correct property to **false** within the **routeOptions** object. Below is a list of properties and their effect:
 
-| **Property** | **Effect when false**  |
-| :- | :- |
-| allowList | Omits GET /path endpoint |
-| allowRead | Omits GET /path and GET /path/\{id\} endpoints |
-| allowCreate | Omits POST /path endpoint |
-| allowUpdate | Omits PUT /path/\{id\} endpoint |
-| allowDelete | Omits DELETE /path endpoints and DELETE /path/\{id\} endpoints |
-| allowDeleteMany | Omits DELETE /path endpoints |
+| **Property**    | **Effect when false**                                          |
+| :-------------- | :------------------------------------------------------------- |
+| allowList       | Omits GET /path endpoint                                       |
+| allowRead       | Omits GET /path and GET /path/\{id\} endpoints                 |
+| allowCreate     | Omits POST /path endpoint                                      |
+| allowUpdate     | Omits PUT /path/\{id\} endpoint                                |
+| allowDelete     | Omits DELETE /path endpoints and DELETE /path/\{id\} endpoints |
+| allowDeleteMany | Omits DELETE /path endpoints                                   |
 
 Similarly, you can prevent association endpoints from generating through the following properties within each association object:
 
-| **Property** | **Effect when false**  |
-| - | :- |
-|allowAdd | omits POST /owner/\{ownerId\}/child and PUT /owner/\{ownerId\}/child/\{childId\} endpoints |
-|allowRemove | omits DELETE /owner/\{ownerId\}/child endpoints and DELETE /owner/\{ownerId\}/child/\{childId\} endpoints |
-|allowRemoveMany | omits DELETE /owner/\{ownerId\}/child endpoints |
-|allowRead | omits GET /owner/\{ownerId\}/child endpoint |
+| **Property**    | **Effect when false**                                                                                     |
+| --------------- | :-------------------------------------------------------------------------------------------------------- |
+| allowAdd        | omits POST /owner/\{ownerId\}/child and PUT /owner/\{ownerId\}/child/\{childId\} endpoints                |
+| allowRemove     | omits DELETE /owner/\{ownerId\}/child endpoints and DELETE /owner/\{ownerId\}/child/\{childId\} endpoints |
+| allowRemoveMany | omits DELETE /owner/\{ownerId\}/child endpoints                                                           |
+| allowRead       | omits GET /owner/\{ownerId\}/child endpoint                                                               |
 
 For example, a routeOption object that omits endpoints for creating objects and removing a association could look like this:
 
 ```js filename="models/user.js"
 user.routeOptions = {
-    allowCreate: false,
-    group: {
-        allowRemove: false
-    }
-}
+  allowCreate: false,
+  group: {
+    allowRemove: false,
+  },
+};
 ```
