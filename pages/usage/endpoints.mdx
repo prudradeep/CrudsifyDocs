@@ -102,7 +102,7 @@ DELETE /role/{ownerId}/user             Remove multiple users from a role's list
 DELETE /role/{ownerId}/user/{childId}   Remove a single user object from a role's list of users
 ```
 
-> **NOTE**: If your **models** directory is not in your projects root directory, you will need to specify the path (relative to your projects root directory) by assigning the path to the **modelPath** property in configuration and you will need to set the **absoluteModelPath** property to true.
+> **NOTE**: If your **models** directory is not in your projects root directory, you will need to specify the path (relative to your projects root directory) by assigning the path to the [**modelPath**](./configuration#modelpath) property in configuration and you will need to set the [**absoluteModelPath**](./configuration#absolutemodelpath) property to true.
 
 ## Standalone endpoints
 
@@ -157,7 +157,7 @@ generateEndpoint({
 });
 ```
 
-> NOTE: If your **apis** directory is not in your projects root directory, you will need to specify the path (relative to your projects root directory) by assigning the path to the **apiPath** property in configuration and you will need to set the **absoluteApiPath** property to true.
+> NOTE: If your **apis** directory is not in your projects root directory, you will need to specify the path (relative to your projects root directory) by assigning the path to the [**apiPath**](./configuration#apipath) property in configuration and you will need to set the [**absoluteApiPath**](./configuration#absolutepluginpath) property to true.
 
 ## Additional endpoints
 

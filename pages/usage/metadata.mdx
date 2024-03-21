@@ -7,7 +7,7 @@ Crudsify supports the following optional timestamp metadata for records:
 - createdAt (default enabled)
 - updatedAt (default enabled)
 - deletedAt (default enabled) (see [Soft delete](./softdelete))
-  When **modelOptions.timestamps** is enabled, these properties will automatically be populated during CRUD operations. For example, say I create a group with a payload of:
+  When [**modelOptions.timestamps**](./configuration#modeloptions) is enabled, these properties will automatically be populated during CRUD operations. For example, say I create a group with a payload of:
 
   ```json
   {
@@ -55,11 +55,11 @@ You can give custom names to the timestamps metadata by setting following proper
 
 In addition to timestamps, the following user tag metadata can be added to a record:
 
-- createdBy (default disabled, activated via enableCreatedBy property in configuration)
-- updatedBy (default disabled, activated via enableUpdatedBy property in configuration)
-- deletedBy (default disabled, activated via enableDeletedBy property in configuration) (see [Soft delete](./softdelete))
+- createdBy (default disabled, activated via [enableCreatedBy](./configuration#enablecreatedby) property in configuration)
+- updatedBy (default disabled, activated via [enableUpdatedBy](./configuration#enableupdatedby) property in configuration)
+- deletedBy (default disabled, activated via [enableDeletedBy](./configuration#enabledeletedby) property in configuration) (see [Soft delete](./softdelete))
 - If enabled, these properties will record the id of the user performing the corresponding action.
 
-This assumes that your authentication credentials (req.auth.credentials) will contain either a **user** object with a **dbPrimaryKey** property.
+This assumes that your authentication credentials (req.auth.credentials) will contain either a **user** object with a [**dbPrimaryKey**](./configuration#dbprimarykey) property.
 
 > **NOTE**: Unlike timestamp metadata, user tag properties are only set/updated if the record is created/modified using Crudsify endpoints, (not [Crudsify handlers](./handlers)).

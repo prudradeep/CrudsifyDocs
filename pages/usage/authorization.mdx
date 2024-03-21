@@ -34,7 +34,7 @@ user.routeScopes: {
 
 ## Generating route scopes
 
-If the **generateRouteScopes** property is set to true in configuration, then generated endpoints will come pre-defined with scope values. These values will exist in addition to any route scope values defined in the **routeScope** object. For instance, the tables below show two possibilities for the user model scope: the first is with no model route scope defined, and the second is with a model route scope defined as in the example above.
+If the [**generateRouteScopes**](./configuration#generateroutescopes) property is set to true in configuration, then generated endpoints will come pre-defined with scope values. These values will exist in addition to any route scope values defined in the **routeScope** object. For instance, the tables below show two possibilities for the user model scope: the first is with no model route scope defined, and the second is with a model route scope defined as in the example above.
 
 ### Without Model Route Scope Defined
 
@@ -89,9 +89,9 @@ Similarly, you can disable authorization for generated association endpoints thr
 
 ## Record authorization
 
-In addition to route-level authorization, Crudsify supports reecord-specific authorization. For consistency, record authorization is implemented through the use of scopes similar to the scope system. To enable record scopes,**enableRecordScopes** must be set to true in configuration. Once set, the **recordScopeKey** field will be added to the schema of every model.
+In addition to route-level authorization, Crudsify supports reecord-specific authorization. For consistency, record authorization is implemented through the use of scopes similar to the scope system. To enable record scopes,[**enableRecordScopes**](./configuration#enablerecordscopes) must be set to true in configuration. Once set, the [**recordScopeKey**](./configuration#recordscopekey) field will be added to the schema of every model.
 
-If a records's **recordScopeKey** property is populated with values, it will be compared to a requesting user's scope to determine whether the user is authorized to perform a certain action on the record. For example, if the record's scope property looked like the following:
+If a records's [**recordScopeKey**](./configuration#recordscopekey) property is populated with values, it will be compared to a requesting user's scope to determine whether the user is authorized to perform a certain action on the record. For example, if the record's scope property looked like the following:
 
 ```js
 recordScope: {
@@ -111,7 +111,7 @@ user.recordScope: {
 }
 ```
 
-Another option is to set respective property of [**authorizeRecordCreator**](./configuration#authorizerecordcreator) object to **true**. Setting this option will add the **md5(dbPrimaryKey)** of the user who created the record to the record's respective property (in the form of **user-\{dbPrimaryKey\}**, where **\{dbPrimaryKey\}** is the dbPrimaryKey of the user). Assuming **user-\{dbPrimaryKey\}** is in the user's scope, this will grant the user full access to any record the user creates. Consider the example record below created by a user with an dbPrimaryKey of **1**:
+Another option is to set respective property of [**authorizeRecordCreator**](./configuration#authorizerecordcreator) object to **true**. Setting this option will add the **md5([dbPrimaryKey](./configuration#dbprimarykey))** of the user who created the record to the record's respective property (in the form of **user-\{[dbPrimaryKey](./configuration#dbprimarykey)\}**, where **\{[dbPrimaryKey](./configuration#dbprimarykey)\}** is the primary key of the user). Assuming **user-\{[dbPrimaryKey](./configuration#dbprimarykey)\}** is in the user's scope, this will grant the user full access to any record the user creates. Consider the example record below created by a user with an primary key of **1**:
 
 ```js filename="config/index.js"
 {

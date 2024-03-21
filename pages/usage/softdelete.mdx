@@ -1,6 +1,6 @@
 # Soft Delete
 
-Crudsify supports soft delete functionality for records. When the **modelOptions.paranoid** property is set to **true**, records will gain an **deletedAt** property when they are created that will be set to **null**. Whenever that record is deleted (via a Crudsify endpoint or method), the record will remain in the table, its **deletedAt** property will be set to **deleted timestamp**, and the **deletedAt** and **deletedBy** properties (if enabled) will be populated.
+Crudsify supports soft delete functionality for records. When the [**modelOptions.paranoid**](./configuration#modeloptions) property is set to **true**, records will gain an **deletedAt** property when they are created that will be set to **null**. Whenever that record is deleted (via a Crudsify endpoint or method), the record will remain in the table, its **deletedAt** property will be set to **deleted timestamp**, and the **deletedAt** and **deletedBy** properties (if enabled) will be populated.
 
 "Hard" deletion is still possible when soft delete is enabled. In order to hard delete a record (i.e. remove a record from it's table) via the api, a payload must be sent with the **hardDelete** property set to true.
 
