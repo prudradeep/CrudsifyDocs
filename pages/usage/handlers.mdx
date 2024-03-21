@@ -22,3 +22,140 @@ The available methods are:
 - associationGetAllHandler
 
 These methods provide a quick and easy way to start adding rich, relational data to your db.
+
+## listHandler
+```js
+/**
+ * **Params:**
+ * - DB {object}: A sequelize object.
+ * - model {object}: A sequelize model.
+ * - req {query: {}, body: {}, params: {}}: The req object represents the HTTP request 
+ * and has properties for the request query string, parameters, body and so on.
+ *
+ * @returns {object} A promise for the resulting model records or the count of the query results.
+ */
+listHandler(DB, model, req){...}
+```
+## findHandler
+```js
+/**
+ * **Params:**
+ * - DB {object}: A sequelize object.
+ * - model {object}: A sequelize model.
+ * - req {query: {}, body: {}, params: {}}: The req object represents the HTTP request 
+ * and has properties for the request query string, parameters, body and so on.
+ *
+ * @returns {object} A promise for the resulting model record.
+ */
+findHandler(DB, model, req){...}
+
+```
+## createHandler
+```js
+/**
+ * **Params:**
+ * - model {object}: A sequelize model.
+ * - req {query: {}, body: {}, params: {}}: The req object represents the HTTP request 
+ * and has properties for the request query string, parameters, body and so on.
+ *
+ * @returns {object} A promise for the resulting model record.
+ */
+createHandler(model, req){...}
+
+```
+## updateHandler
+```js
+/**
+ * **Params:**
+ * - model {object}: A sequelize model.
+ * - req {query: {}, body: {}, params: {}}: The req object represents the HTTP request 
+ * and has properties for the request query string, parameters, body and so on.
+ *
+ * @returns {object} A promise for the resulting model record.
+ */
+updateHandler(model, req){...}
+
+```
+## deleteHandler
+```js
+/**
+ * **Params:**
+ * - model {object}: A sequelize model.
+ * - req {query: {}, body: {}, params: {}}: The req object represents the HTTP request 
+ * and has properties for the request query string, parameters, body and so on.
+ *
+ * @returns {object} A promise for the resulting model record.
+ */
+deleteHandler(model, req){...}
+
+```
+## associationAddOneHandler
+```js
+/**
+ * **Params:**
+ * - model {object}: A sequelize model.
+ * _ association: An association object of the model.
+ * - req {query: {}, body: {}, params: {}}: The req object represents the HTTP request 
+ * and has properties for the request query string, parameters, body and so on.
+ *
+ * @returns {object} A promise for the resulting model record.
+ */
+associationAddOneHandler(model, association, req){...}
+
+```
+## associationRemoveOneHandler
+```js
+/**
+ * **Params:**
+ * - model {object}: A sequelize model.
+ * _ association: An association object of the model.
+ * - req {query: {}, body: {}, params: {}}: The req object represents the HTTP request 
+ * and has properties for the request query string, parameters, body and so on.
+ *
+ * @returns {object} A promise for the resulting model record.
+ */
+associationRemoveOneHandler(model, association, req){...}
+
+```
+## associationAddManyHandler
+```js
+/**
+ * **Params:**
+ * - model {object}: A sequelize model.
+ * _ association: An association object of the model.
+ * - req {query: {}, body: {}, params: {}}: The req object represents the HTTP request 
+ * and has properties for the request query string, parameters, body and so on.
+ *
+ * @returns {object} A promise for the resulting model record.
+ */
+associationAddManyHandler(model, association, req){...}
+
+```
+## associationRemoveManyHandler
+```js
+/**
+ * **Params:**
+ * - model {object}: A sequelize model.
+ * _ association: An association object of the model.
+ * - req {query: {}, body: {}, params: {}}: The req object represents the HTTP request 
+ * and has properties for the request query string, parameters, body and so on.
+ *
+ * @returns {object} A promise for the resulting model record.
+ */
+associationRemoveManyHandler(model, association, req){...}
+
+```
+## associationGetAllHandler
+```js
+/**
+ * **Params:**
+ * - model {object}: A sequelize model.
+ * _ association: An association object of the model.
+ * - req {query: {}, body: {}, params: {}}: The req object represents the HTTP request 
+ * and has properties for the request query string, parameters, body and so on.
+ *
+ * @returns {object} A promise for the resulting model record.
+ */
+associationGetAllHandler(DB, model, association, req){...}
+
+```

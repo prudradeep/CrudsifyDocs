@@ -1,8 +1,8 @@
 # Audit Logs
 
-By default, Crudsify records all rercord-modifiying activities that occur within the [generated endpoints](./endpoints). Each event is stored as a rercord in the [**auditLogStorage**](./configuration#auditlogstorage) defined in the configuration, by default it's a **file**. The audit log rercords can be set to expire by providing a value for [**auditLogTTL**](./configuration#auditlogttl) in configuration. The value can be a number of files or number of days. (Ex: 5 = 5 files or '5d' = 5 days). Audit logs can be disabled by setting [**enableAuditLog**](./configuration#enableauditlog) to **false**.
+By default, Crudsify records all record-modifiying activities that occur within the [generated endpoints](./endpoints). Each event is stored as a record in the [**auditLogStorage**](./configuration#auditlogstorage) defined in the configuration, by default it's a **file**. The audit log records can be set to expire by providing a value for [**auditLogTTL**](./configuration#auditlogttl) in configuration. The value can be a number of files or number of days. (Ex: 5 = 5 files or '5d' = 5 days). Audit logs can be disabled by setting [**enableAuditLog**](./configuration#enableauditlog) to **false**.
 
-## Properties included in each auditLog rercord:
+## Properties included in each auditLog record:
 
 ### expires
 
