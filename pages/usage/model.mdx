@@ -1,0 +1,113 @@
+# Model helpers
+
+## getPrimaryKey
+
+Use this method to get primary key attribute to be added in the model definition as per the [**dbPrimaryKey**](./), you defined in the configuration.
+
+```js
+getPrimaryKey(DataTypes){ ... }
+```
+
+## getTimestamps
+
+Use this method to get timestamp attributes to be added in the model definition as per the [**modelOptions**](./configuration#modeloptions), you defined in the configuration.
+
+```js
+getTimestamps(DataTypes){ ... }
+```
+
+## getMetadata
+
+Use this method to get metadata attributes to be added in the model definition if [enableCreatedBy](./configuration#enablecreatedby), [enableUpdatedBy](./configuration#enableupdatedby) and [enableDeletedBy](./configuration#enabledeletedby) set to true in the configuration.
+
+```js
+getMetadata(DataTypes){ ... }
+```
+
+## getRecordScopes
+
+Use this method to get recordScope attribute to be added in the model definition as per the [**recordScopeKey**](./configuration#recordscopekey), you defined in the configuration.
+
+```js
+getRecordScopes(DataTypes){ ... }
+```
+
+## Example:
+
+### Model
+
+```js filename="models/group.js"
+"use strict";
+const { Model } = require("sequelize");
+const _ = require("lodash");
+const {
+  getPrimaryKey,
+  getTimestamps,
+  getMetadata,
+  getRecordScopes,
+} = require("crudsify/helpers/model");
+module.exports = (sequelize, DataTypes) => {
+  class group extends Model {
+    static associate(models) {
+      // define association here
+    }
+  }
+  group.init(
+    {
+      ..._.cloneDeep(getPrimaryKey(DataTypes)),
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      ..._.cloneDeep(getRecordScopes(DataTypes)),
+      ..._.cloneDeep(getTimestamps(DataTypes)),
+      ..._.cloneDeep(getMetadata(DataTypes)),
+    },
+    {
+      sequelize,
+      modelName: "group",
+    }
+  );
+
+  return group;
+};
+```
+
+### Migration
+
+```js filename="migrations/__-create-group.js"
+"use strict";
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    const {
+      getPrimaryKey,
+      getTimestamps,
+      getMetadata,
+      getRecordScopes,
+    } = require("crudsify/helpers/model");
+    await queryInterface.createTable("groups", {
+      ...getPrimaryKey(Sequelize),
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      ...getRecordScopes(Sequelize),
+      ...getTimestamps(Sequelize),
+      ...getMetadata(Sequelize),
+    });
+  },
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable("groups");
+  },
+};
+```

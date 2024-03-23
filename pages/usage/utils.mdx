@@ -1,0 +1,56 @@
+# Utilities
+
+Here are some list of Utilities, you can use.
+
+## ucfirst
+
+Get a proper case string.
+
+```js
+const word = ucfirst("crudsify)
+// output: Crudsify
+```
+
+## sortObjectByKeys
+
+Sort an object by keys
+
+## generateHash
+
+Generates bcrypt key and hash.
+
+```js
+const hash = generateHash(key);
+
+// or
+
+const hash = generateHash();
+```
+
+## getIP
+
+Get user IP address.
+
+## generateToken
+
+Generates a JWT token for the provided data and expirationPeriod.
+
+```js
+const token = generateToken(data, expirationPeriod);
+```
+
+## getScopes
+
+Get scopes for a model for a specific operation i.e. create, read, update, delete & associate
+
+```js
+const scopes = getScopes(model, opeation);
+```
+
+## getPathName
+
+Get a models endpoint name.
+
+```js
+const name = getPathName(model);
+```

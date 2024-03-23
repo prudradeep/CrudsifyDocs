@@ -1,7 +1,9 @@
 {
-    "faqs": "FAQs",
-    "questions": "Questions",
-    "support": "Support",
-    "help": "Help",
-    "issue": "Issues"
+  "questions": "Questions",
+  "coffee": "Buy me a coffee",
+  "issue": {
+    "title": "Issues",
+    "href": "https://github.com/prudradeep/crudsify/issues",
+    "newWindow": true
+  }
 }

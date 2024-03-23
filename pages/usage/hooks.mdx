@@ -1,0 +1,114 @@
+# Hooks
+
+## CRUD
+
+Hooks (also known as lifecycle events), are functions which are called before and after calls DB CRUD operations.
+Crudsify support hook functions for CRUD operations. These exist under the **hooks** object.
+The following hook functions are available:
+
+### list
+
+- pre(req)
+  - returns: req
+- post(req, data)
+  - returns: data
+
+### find
+
+- pre(req)
+  - returns: req
+- post(req, data)
+  - returns: data
+
+### create
+
+- pre(req)
+  - returns: req
+- post(req, data)
+  - returns: data
+
+### update
+
+- pre(req)
+  - returns: req
+- post(req, data)
+  - returns: data
+
+### delete
+
+- pre(req, hardDelete)
+  - returns: null
+- post(req, hardDelete, deleted)
+  - returns: null
+
+For example, a create: pre function can be defined to encrypt a users password using a static method generatePasswordHash.
+
+```js filename="models/user.js"
+// ...
+user.hooks = {
+    create: {
+        pre: (req) => {
+            try{
+                if (!req.body.password) req.body.password = GeneratePassword(10, false);
+                    req.body.password = generateHash(req.body.password).hash;
+            } catch (err) {
+                throw err;
+            }
+            return req;
+        },
+        post: (req, data) => {
+            return data;
+        }
+    }
+}
+// ...
+```
+> **NOTE**: If an error is thrown within a hook function, that error will become the server response.
+## Association
+
+Support is being added for association hook. Currently the following association hook exist:
+
+### getAll
+
+- pre(req)
+  - returns: req
+- post(req, data)
+  - returns: data
+
+### add
+
+- pre(req)
+  - returns: req
+- post(req, data)
+  - returns: data
+
+### remove
+
+- pre(req)
+  - returns: null
+- post(req)
+  - returns: null;
+
+Association hook is defined similar to CRUD hook, with the only difference being the association name must be specified. See below for an example:
+
+```js filename="models/user.js"
+// ...
+user.hooks = {
+    getAll: {
+        group: { // this must match the association name
+            pre: (req) => {
+                return req;
+            },
+            post: (req, data) => {
+                return data;
+            }
+        }
+    }
+}
+// ...
+```
+
+## Sequelize Hooks
+
+Sequelize provides a lot of hooks.
+Kindly check the sequeliz hooks [documentation here](https://sequelize.org/docs/v6/other-topics/hooks/)

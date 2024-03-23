@@ -119,3 +119,18 @@ Below is an example of an auditLog record:
   "ipAddress": "::1"
 }
 ```
+
+## Use in API endpoints
+
+You can log your [standalone](./endpoints#standalone-endpoints)/[additional](./endpoints#additional-endpoints) endpoints in audit log as following:
+
+```js filename="apis/auth.js"
+const { logApiMiddleware } = require("crudsify/middlewares/audit-log");
+// ...
+generateEndpoint({
+  ...
+  afterMiddlewares: [logApiMiddleware({payloadFilter: ["name"]})]; // Only log name value in the logs from the req.body.
+  ...
+});
+// ...
+```

@@ -1,0 +1,13 @@
+# Send response
+
+To send a response, you can use **sendResponse** middleware.
+
+```js
+sendResponse({
+    data, // A json object or string.
+    status, // Status code for the response.
+    res, // res object of the Express JS.
+    next, // next method of the Express JS.
+    json, // A data is json flag, true/false
+});
+```

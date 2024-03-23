@@ -4,12 +4,15 @@
   "route": "Route Customization",
   "querying": "Querying",
   "validation": "Validation",
-  "middleware": "Model Middleware",
   "authentication": "Authentication",
   "authorization": "Authorization",
   "auditlogs": "Audit Logs",
+  "hooks": "Hooks",
   "policies": "Policies",
   "handlers": "Handlers",
   "softdelete": "Soft Delete",
-  "metadata": "Metadata"
+  "metadata": "Metadata",
+  "model": "Model Helpers",
+  "response": "Send Response",
+  "utils": "Utils"
 }

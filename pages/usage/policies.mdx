@@ -1,0 +1,35 @@
+# Policies
+
+Policies are a wrapper methods around ExpressJS middleware, that returns ExpressJS middleware. It provide a powerful method of applying the same business logic to multiple models declaratively.
+
+If [**enablePolicies**](./configuration#enablepolicies) enabled in configuration, policies will be applied to the respective model routes before or after [handlers](./handlers).
+
+You can add an array of policies for the following actions in **pre** or **post** object of a **model.policies**.
+
+- root: Run for all endpoints.
+- create: Run only for create endpoint.
+- read: Run only for read & list endpoints.
+- update: RUn only for update endpoint.
+- delete: Run only for remove endpoints.
+- associate: Run for all association endpoints.
+
+For example:
+
+```js filename="models/user.js"
+//...
+user.policies = {
+  pre: {
+    update: [
+      rankAuth(sequelize, configStore.get("/dbPrimaryKey").name),
+      promoteAuth(sequelize),
+    ],
+    delete: [rankAuth(sequelize, configStore.get("/dbPrimaryKey").name)],
+    associate: [
+      rankAuth(sequelize, "ownerId"),
+      permissionAuth(sequelize, false),
+      groupAuth(sequelize, false),
+    ],
+  },
+};
+//...
+```
