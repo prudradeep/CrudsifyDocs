@@ -8,14 +8,6 @@ export default {
       titleTemplate: "%s – Crudsify",
     };
   },
-  banner: {
-    key: "1.0-release",
-    text: (
-      <a href="https://nextra.site" target="_blank">
-        🎉 Nextra 1.0 is released. Read more →
-      </a>
-    ),
-  },
   sidebar: {
     autoCollapse: true,
     defaultMenuCollapseLevel: 1,

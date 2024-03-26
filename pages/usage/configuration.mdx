@@ -110,12 +110,24 @@ logFileMaxSize: "20m";
 
 ```js
 /**
-* Cors settings for generated endpoints. Can be set to false to disable.
-* @type {{headers: string[], exposedHeaders: string[]}}
-*/
+ * Cors settings for generated endpoints. Can be set to false to disable.
+ * @type {{headers: string[], exposedHeaders: string[]}}
+ */
 cors: {
   origin: "*",
   exposedHeaders: ["X-Access-Token", "X-Refresh-Token"],
+}
+```
+
+### ssl
+
+```js
+/**
+ * SSL certificate and key absolute path to enable ssl.
+ */
+ssl: {
+  key: false,
+  cert: false,
 }
 ```
 
