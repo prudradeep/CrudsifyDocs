@@ -35,9 +35,11 @@ npm install @faker-js/faker --save-dev
 npx sequelize-cli db:seed:all
 ```
 
+It will seed roles, groups, permissions and users also assign groups to users and permissions to roles, groups and users.
+
 ## Authentication
 
-To enable authentication, set [authentication](./configuration#authentication) **true** in configuration file, by default authentication is false.
+To enable authentication, set [authentication](../usage/configuration#authentication) **true** in configuration file, by default authentication is false.
 
 ```js filename="config/index.js" showLineNumbers
 module.exports = {

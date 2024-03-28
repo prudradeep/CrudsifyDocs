@@ -1,6 +1,24 @@
 # Configuration
 
-Configuration of Crudsify is handled through the **config/index.js** file. Below is a description of the default configuration options/properties.
+Configuration of Crudsify is handled through the **config/index.js** file in your root directory. 
+
+Override default configuration for environments as below:
+
+```js filename="config/index.js"
+module.exports={
+  [propertyNameOne]: {
+    $filter: "env",
+    //Atleast one environment(developer|uat|production) value should be defined.
+    production: "value", //Applied to only production environment.
+    uat: "value", //Applied to only uat environment.
+    $default: "value", //Applied to all environments if not defined.
+  },
+  //or
+  [propertyNameTwo]: "value",
+}
+```
+
+Below is a description of the default configuration options/properties.
 
 ### service
 
